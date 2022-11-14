@@ -22,6 +22,7 @@ require([
     }
   });
 
+  // a func for whenever a new chat entry is added
   function addChatEntry(input) {
     // creating a div with the input text inside it as a user response
     // then palcing that text at the last child of the messages container
@@ -33,9 +34,13 @@ require([
     // creating a div with the input text inside it as a bot response
     // then palcing that text at the last child of the messages container
     var botDiv = domConstruct.toDom(
-      `<div id="bot" class="bot response">${input}</div>`
+      `<div id="bot" class="bot response">echo: ${input}</div>`
     );
     domConstruct.place(botDiv, messagesContainer, "last");
+
+    // this code will keep the scroll bar down when new chats are entered
+    messagesContainer.scrollTop =
+      messagesContainer.scrollHeight - messagesContainer.clientHeight;
 
     // let userDiv = document.createElement("div");
     // userDiv.id = "user";
