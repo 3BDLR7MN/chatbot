@@ -20,7 +20,28 @@
 
   <!-- in order for the dijit style to apply you have to link a class to the body -->
   <body class="claro">
-    <h2>Test</h2>
+    <div id="container" class="container">
+      <img
+        src="https://cdn.pixabay.com/photo/2020/01/02/16/38/chatbot-4736275_960_720.png"
+        height="400vh"
+        alt="Chatbot clipart"
+      />
+      <div id="chat" class="chat">
+        <div id="messages" class="messages"></div>
+        <!-- <input
+          id="input"
+          type="text"
+          placeholder="Write something..."
+          autocomplete="off" 
+          autofocus="true"
+        /> -->
+        <input
+          id="input"
+          data-dojo-type="dijit/form/TextBox"
+          data-dojo-props="placeHolder: 'Write something...'"
+        />
+      </div>
+    </div>
 
     <!-- Dojo CDN Script -->
     <!-- https: IMPORTANT -->

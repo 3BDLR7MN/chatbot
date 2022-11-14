@@ -1,3 +1,9 @@
-require(["dojo/dom", "dojo/on", "dojo/domReady!"], function (dom, on) {
-  console.log("testing");
-});
+require([
+  // programmatic
+  "dojo/dom",
+  "dojo/on",
+  // declarative
+  "dojo/parser",
+  "dijit/form/TextBox",
+  "dojo/domReady!",
+], function (dom, on) {});
