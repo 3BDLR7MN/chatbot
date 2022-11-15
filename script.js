@@ -2,23 +2,40 @@ require([
   // programmatic
   "dojo/dom",
   "dojo/on",
+  "dojo/dom-class",
   "dojo/dom-construct",
-  // declarative
-  "dojo/parser",
-  "dijit/form/TextBox",
   "dojo/domReady!",
-], function (dom, on, domConstruct) {
-  var messagesContainer = dom.byId("messages");
-  var inputField = dom.byId("input");
+], function (dom, on, domClass, domConstruct) {
+  var popup = dom.byId("chat-popup");
+  var chatBtn = dom.byId("chat-btn");
+  var chatArea = dom.byId("chat-area");
+  var inputElm = dom.byId("input");
 
-  // when inside the input field an enter key is pressed
-  // save the input field value in a variable and then reset it
-  // and a function is run with the input value passed as param
-  on(inputField, "keydown", function (e) {
+  // chat button toggler
+  on(chatBtn, "click", function () {
+    domClass.toggle(popup, "show");
+
+    // focus on input field when chat box is shown
+    if (domClass.contains(popup, "show")) {
+      inputElm.focus();
+    }
+  });
+
+  // hide chatbot if clicked outside it's box or by chatbot button
+  on(document, "click", function (e) {
+    if (!popup.contains(e.target) && !chatBtn.contains(e.target)) {
+      domClass.remove(popup, "show");
+    }
+  });
+
+  // send msg by pressing enter then pass it to func as long as it's not empty
+  on(inputElm, "keydown", function (e) {
     if (e.keyCode === 13) {
-      let input = inputField.value;
-      inputField.value = "";
-      addChatEntry(input);
+      if (inputElm.value !== "") {
+        let input = inputElm.value;
+        inputElm.value = "";
+        addChatEntry(input);
+      }
     }
   });
 
@@ -27,37 +44,22 @@ require([
     // creating a div with the input text inside it as a user response
     // then palcing that text at the last child of the messages container
     var userDiv = domConstruct.toDom(
-      `<div id="user" class="user response">${input}</div>`
+      `<div class="out-msg">
+      <span class="my-msg">${input}</span>
+      </div>`
     );
-    domConstruct.place(userDiv, messagesContainer, "last");
+    domConstruct.place(userDiv, chatArea, "last");
 
     // creating a div with the input text inside it as a bot response
     // then palcing that text at the last child of the messages container
     var botDiv = domConstruct.toDom(
-      `<div id="bot" class="bot response">echo: ${input}</div>`
+      `<div class="income-msg">
+      <span class="msg">Echo: ${input}</span>
+      </div>`
     );
-    domConstruct.place(botDiv, messagesContainer, "last");
+    domConstruct.place(botDiv, chatArea, "last");
 
     // this code will keep the scroll bar down when new chats are entered
-    messagesContainer.scrollTop =
-      messagesContainer.scrollHeight - messagesContainer.clientHeight;
-
-    // let userDiv = document.createElement("div");
-    // userDiv.id = "user";
-    // userDiv.className = "user response";
-    // userDiv.innerHTML = `${input}`;
-    // messagesContainer.appendChild(userDiv);
-
-    // let botDiv = document.createElement("div");
-    // let botText = document.createElement("span");
-    // botDiv.id = "bot";
-    // botDiv.className = "bot response";
-    // botText.innerText = "Typing...";
-    // botDiv.appendChild(botText);
-    // messagesContainer.appendChild(botDiv);
-
-    // setTimeout(() => {
-    //   botText.innerText = `${product}`;
-    // }, 2000);
+    chatArea.scrollTop = chatArea.scrollHeight - chatArea.clientHeight;
   }
 });

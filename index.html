@@ -20,25 +20,25 @@
 
   <!-- in order for the dijit style to apply you have to link a class to the body -->
   <body class="claro">
-    <div id="container" class="container">
-      <img
-        src="https://cdn.pixabay.com/photo/2020/01/02/16/38/chatbot-4736275_960_720.png"
-        height="400vh"
-        alt="Chatbot clipart"
-      />
-      <div id="chat" class="chat">
-        <div id="messages" class="messages"></div>
+    <section>
+      <button class="chat-btn" id="chat-btn">
+        <span>chatbot</span>
+      </button>
 
-        <!-- dojo text input couldn't pass keypresses! -->
-        <input
-          id="input"
-          type="text"
-          placeholder="Write something..."
-          autocomplete="off"
-          autofocus="true"
-        />
+      <div class="chat-popup" id="chat-popup">
+        <div class="chat-area" id="chat-area">
+          <div class="income-msg">
+            <span class="msg"
+              >Hi, I'm Echo Bot, I'll repeat what you say :)</span
+            >
+          </div>
+        </div>
+
+        <div class="input-area">
+          <input type="text" id="input" />
+        </div>
       </div>
-    </div>
+    </section>
 
     <!-- Dojo CDN Script -->
     <!-- https: IMPORTANT -->
@@ -47,7 +47,6 @@
       data-dojo-config="has:{'dojo-firebug': true}, parseOnLoad: true, foo: 'bar', async: 1"
     ></script>
 
-    <!-- Dojo Script -->
     <script src="script.js"></script>
   </body>
 </html>
