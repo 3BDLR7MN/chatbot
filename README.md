@@ -1,3 +1,3 @@
 # chatbot
 
-hosted on: https://dojo-chatbot.netlify.app/
+need a server to work properly! (Tomcat)
