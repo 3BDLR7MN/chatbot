@@ -1,3 +1,3 @@
 # chatbot
 
-hosted at: https://dojo-chatbot.netlify.app/
+hosted on: https://dojo-chatbot.netlify.app/
